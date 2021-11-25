@@ -1,20 +1,56 @@
 import React from 'react';
-import {Box, Center, Text, Button} from 'native-base';
+import { Dimensions, StyleSheet, View } from 'react-native';
+import { Box, Center, Text, Button, Image, Container } from 'native-base';
+import Swiper from 'react-native-swiper/src';
 
-const Explain = (props) => {
+const { width, height } = Dimensions.get('screen');
+
+const Explain = ({ navigation }) => {
   return (
     <Center flex={1} safeArea>
-      <Box flex={1} mx={5}>
-        <Text mb={5}>Pick any infographic at this search for "How to Do a Squat" and implement a 3-4 step explainer as a
-          React Native screen.</Text>
-        <Text mb={5}>Tell us what your source is in the comments.</Text>
-        <Text>https://www.google.com/search?q=how+to+do+a+squat+infographic&tbm=isch</Text>
-
-      </Box>
-      <Button onPress={() => props.navigation.navigate("Detect")}>Go to Detection</Button>
+      <Swiper>
+        <View style={styles.slide}>
+          <Image
+            source={require('../../assets/step1.jpg')}
+            width="100%"
+            resizeMode="contain"
+            alt="step1"
+          />
+        </View>
+        <View style={styles.slide}>
+          <Image
+            source={require('../../assets/step2.jpg')}
+            width="100%"
+            resizeMode="contain"
+            alt="step2"
+          />
+        </View>
+        <View style={styles.slide}>
+          <Image
+            source={require('../../assets/step3.jpg')}
+            width="100%"
+            resizeMode="contain"
+            alt="step3"
+          />
+        </View>
+      </Swiper>
+      <Button onPress={() => navigation.navigate('Detect')}>
+        Go to Detection
+      </Button>
     </Center>
-  )
-}
-
+  );
+};
 
 export default Explain;
+
+const styles = StyleSheet.create({
+  container: {
+    maxWidth: '100%',
+    flex: 1,
+  },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
